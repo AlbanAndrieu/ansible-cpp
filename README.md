@@ -2,23 +2,37 @@
 
 A role for installing cpp.
 
+[![Build Status](https://api.travis-ci.org/AlbanAndrieu/ansible-cpp.png?branch=master)](https://travis-ci.org/AlbanAndrieu/ansible-cpp)
 
 ## Actions
 
 - Ensures that cpp is installed (using `apt`)
 
+Usage example
+------------
 
-## Usage:
-```
-  - name: Install cpp
-    hosts: cpp
-    user: root
-  #  connection: local
+    - name: Install cpp
+      hosts: cpp
+      remote_user: root
     
-    roles:
-      - cpp      
-```
+      roles:
+        - cpp      
 
-## License
+Requirements
+------------
+
+none
+
+Dependencies
+------------
+
+none
+
+License
+-------
 
 MIT
+
+#### Feedback, bug-reports, requests, ...
+
+Are [welcome](https://github.com/AlbanAndrieu/ansible-cpp/issues)!
