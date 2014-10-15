@@ -1,0 +1,15 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+   
+- name: Install tools (apt)
+  apt: pkg={{ item }} state=present update_cache=yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
+  tags: package  
+  with_items:   
+   - libcppunit-1.13-0
+   - libboost1.54-dbg
+#   - libboost1.54-dev
+   - libboost-iostreams1.54.0
+   - libboost-thread1.54.0
+   - libboost-date-time1.54-dev
+   - libboost-system1.54.0
