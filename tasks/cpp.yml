@@ -1,7 +1,14 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
    
-- name: Install tools (apt)
+- name: cpp | Install C++ compiler
+  apt: pkg={{ item }} state=present update_cache=yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  with_items:
+   - gcc=4:4.6.3-1ubuntu5
+   - g++=4:4:4.6.3-1ubuntu5
+   
+- name: cpp | Install C++ librairies
   apt: pkg={{ item }} state=present update_cache=yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
   tags: package  
@@ -13,3 +20,9 @@
    - libboost-thread1.54.0
    - libboost-date-time1.54-dev
    - libboost-system1.54.0
+#   - libstdc++5
+#   - libc6-i386
+#   - libc6-dev-i386
+#   - ia32-libs
+#   - lib32stdc++6
+#   - g++-multilib
