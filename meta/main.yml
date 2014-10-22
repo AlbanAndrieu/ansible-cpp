@@ -1,6 +1,6 @@
 ---
-dependencies:
-  - { role: ansible-cmake } 
+#dependencies:
+#  - { role: ansible-cmake } 
   
 galaxy_info:
   author: Alban Andrieu
