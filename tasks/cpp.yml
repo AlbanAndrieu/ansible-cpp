@@ -13,7 +13,7 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
   tags: package  
   with_items:   
-   - libcppunit-{{ cppunit_version }}-0
+   - libcppunit-{{ cppunit_version }}
    - libboost{{ boost_version }}-dbg
    - libboost-iostreams{{ boost_version }}.0
    - libboost-thread{{ boost_version }}.0

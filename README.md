@@ -3,6 +3,8 @@
 A role for installing cpp.
 
 [![Build Status](https://api.travis-ci.org/AlbanAndrieu/ansible-cpp.png?branch=master)](https://travis-ci.org/AlbanAndrieu/ansible-cpp)
+[![Galaxy](http://img.shields.io/badge/galaxy-cpp-blue.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/0000)
+[![Tag](http://img.shields.io/github/tag/AlbanAndrieu/ansible-cpp.svg?style=flat-square)]()
 
 ## Actions
 
