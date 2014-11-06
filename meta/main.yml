@@ -27,7 +27,8 @@ galaxy_info:
 
 ansigenome_info:
   galaxy_id: ''
-
+  galaxy_user:  'alban.andrieu'
+  
   travis: True
   
   authors:

@@ -12,7 +12,7 @@ install:
   - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
 
   # Install dependencies.
-  - ansible-galaxy install AlbanAndrieu.cmake
+  - ansible-galaxy install alban.andrieu.cmake
 script:
   - ansible --version
   - export ANSIBLE_ROLES_PATH="../"
