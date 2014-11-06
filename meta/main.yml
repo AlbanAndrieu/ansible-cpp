@@ -1,7 +1,7 @@
 ---
 
 dependencies:
-  - { role: AlbanAndrieu.cmake } 
+  - { role: alban.andrieu.cmake } 
   
 galaxy_info:
   author: Alban Andrieu
@@ -31,7 +31,7 @@ ansigenome_info:
   travis: True
   
   authors:
-    - name:  'Alban Andrieu'
+    - name:  'alban.andrieu'
       url: 'fr.linkedin.com/in/nabla/'
       email: 'alban.andrieu@free.fr'
       twitter: 'AlbanAndrieu'

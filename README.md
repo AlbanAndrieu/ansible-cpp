@@ -1,13 +1,13 @@
 ## cpp
 
-[![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-cpp.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-cpp) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-cpp.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-cpp/tree/master)  [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
+[![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-cpp.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-cpp) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-cpp.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-cpp/tree/master) [![Donate](https://img.shields.io/gratipay/AlbanAndrieu.svg?style=flat)](https://www.gratipay.com/AlbanAndrieu)  [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
 
 Ensures that the basic cpp requirements are properly installed (using `apt`) and configured
 
 
 ### Role dependencies
 
-- `AlbanAndrieu.cmake`
+- `alban.andrieu.cmake`
 
 ### Role variables
 
@@ -34,7 +34,7 @@ Describe how to use in more detail...
 ### Authors and license
 
 `cpp` role was written by:
-- [Alban Andrieu](fr.linkedin.com/in/nabla/) | [e-mail](mailto:alban.andrieu@free.fr) | [Twitter](https://twitter.com/AlbanAndrieu) | [GitHub](https://github.com/AlbanAndrieu)
+- [alban.andrieu](fr.linkedin.com/in/nabla/) | [e-mail](mailto:alban.andrieu@free.fr) | [Twitter](https://twitter.com/AlbanAndrieu) | [GitHub](https://github.com/AlbanAndrieu)
 - License: [GPLv3](https://tldrlegal.com/license/gnu-general-public-license-v3-%28gpl-3%29)
 
 ### Feedback, bug-reports, requests, ...
