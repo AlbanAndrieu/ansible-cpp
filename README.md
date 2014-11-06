@@ -2,7 +2,7 @@
 
 [![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-cpp.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-cpp) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-cpp.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-cpp/tree/master)  [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
 
-Ensures that basic cpp requirements is installed (using `apt`)
+Ensures that the basic cpp requirements are properly installed (using `apt`) and configured
 
 
 ### Role dependencies

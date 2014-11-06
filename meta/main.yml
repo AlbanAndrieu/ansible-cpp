@@ -38,7 +38,7 @@ ansigenome_info:
       github: 'AlbanAndrieu'
       
   synopsis: |
-    Ensures that basic cpp requirements is installed (using `apt`)
+    Ensures that the basic cpp requirements are properly installed (using `apt`) and configured        
 
   usage: |
     Describe how to use in more detail...
