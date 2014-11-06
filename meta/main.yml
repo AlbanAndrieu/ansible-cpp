@@ -1,12 +1,13 @@
 ---
-#dependencies:
-#  - { role: ansible-cmake } 
+
+dependencies:
+  - { role: AlbanAndrieu.cmake } 
   
 galaxy_info:
   author: Alban Andrieu
   description: A role for installing cpp
   company: Nabla
-  license: MIT
+  license: GPLv3
   min_ansible_version: 1.6.3
   platforms:
   - name: Ubuntu
@@ -23,3 +24,24 @@ galaxy_info:
     - trusty
   categories:
   - development
+
+ansigenome_info:
+  galaxy_id: ''
+
+  travis: True
+  
+  authors:
+    - name:  'Alban Andrieu'
+      url: 'fr.linkedin.com/in/nabla/'
+      email: 'alban.andrieu@free.fr'
+      twitter: 'AlbanAndrieu'
+      github: 'AlbanAndrieu'
+      
+  synopsis: |
+    Ensures that basic cpp requirements is installed (using `apt`)
+
+  usage: |
+    Describe how to use in more detail...
+
+  #custom: |
+  #  Any custom output you want after the usage section..
