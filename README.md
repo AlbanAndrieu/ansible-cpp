@@ -39,7 +39,7 @@ Describe how to use in more detail...
 
 ### Feedback, bug-reports, requests, ...
 
-Are [welcome](https://github.com/AlbanAndrieu/ansible-cpp/issues>)!
+Are [welcome](https://github.com/AlbanAndrieu/ansible-cpp/issues)!
 
 ***
 
