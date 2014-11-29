@@ -1,7 +1,7 @@
 ---
 dependencies:
-  - { role: alban.andrieu.cmake } 
-  
+  - { role: alban.andrieu.cmake }
+
 galaxy_info:
   author: Alban Andrieu
   description: A role for installing cpp
@@ -30,16 +30,16 @@ ansigenome_info:
   galaxy_name: 'cpp'
 
   travis: True
-  
+
   authors:
     - name:  'alban.andrieu'
       url: 'fr.linkedin.com/in/nabla/'
       email: 'alban.andrieu@free.fr'
       twitter: 'AlbanAndrieu'
       github: 'AlbanAndrieu'
-      
+
   synopsis: |
-    Ensures that the basic cpp requirements are properly installed (using `apt`) and configured        
+    Ensures that the basic cpp requirements are properly installed (using `apt`) and configured
 
   usage: |
     Describe how to use in more detail...
