@@ -27,7 +27,7 @@ galaxy_info:
 
 ansigenome_info:
   galaxy_id: ''
-  galaxy_user:  'alban.andrieu'
+  galaxy_user: 'alban.andrieu'
   galaxy_name: 'cpp'
     
   travis: True
