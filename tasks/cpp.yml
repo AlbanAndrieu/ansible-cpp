@@ -1,18 +1,18 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
-   
+
 - name: cpp | Install C++ compiler
   apt: pkg={{ item }} state=present update_cache=yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   with_items:
    - gcc={{ gcc_version }}
    - g++={{ gcc_version }}
-   
+
 - name: cpp | Install C++ librairies
   apt: pkg={{ item }} state=present update_cache=yes
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
-  tags: package  
-  with_items:   
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags: package
+  with_items:
    - libcppunit-{{ cppunit_version }}
    - libboost{{ boost_version }}-dbg
    - libboost-iostreams{{ boost_version }}.0
