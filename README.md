@@ -14,8 +14,7 @@ Ensures that the basic cpp requirements are properly installed (using `apt`) and
 List of default variables available in the inventory:
 
 ```yaml
-        ---
-    cpp_enabled: yes                       # Enable module
+        cpp_enabled: yes                       # Enable module
     
     gcc_version: "4:4.6.3-1ubuntu5"
     #gcc_version: "4:4.8.2-1ubuntu6"
