@@ -1,17 +1,31 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
+- name: workstation | Install C++ toolchain PPA
+  apt_repository: repo='ppa:ubuntu-toolchain-r/test' update_cache=yes
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
+  tags: cpp
+
 - name: cpp | Install C++ compiler
   apt: pkg={{ item }} state=present update_cache=yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   with_items:
    - gcc={{ gcc_version }}
    - g++={{ gcc_version }}
+   - clang-{{ clang_version }}
+  tags: cpp
+
+#sudo update-alternatives --remove-all gcc
+#sudo update-alternatives --remove-all g++
+#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 20
+#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
+#sudo update-alternatives --config gcc
+#sudo update-alternatives --config g++
 
 - name: cpp | Install C++ librairies
   apt: pkg={{ item }} state=present update_cache=yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  tags: package
+  tags: cpp
   with_items:
    - libcppunit-{{ cppunit_version }}
    - libboost{{ boost_version }}-dbg
@@ -25,11 +39,27 @@
 #   - ia32-libs
 #   - lib32stdc++6
 #   - g++-multilib
+   - libapr1
+   - libaprutil1
+   - liblog4cxx10
+   - libssl0.9.8
+   - libldap-2.4-2
+   - libcurl3
+   - zlib1g
+#   - libcrypto++9
+#   - libxerces-c28
 
 - name: cpp | Install C++ quality tool
   apt: pkg={{ item }} state=present update_cache=yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  tags: package
+  tags: cpp
   with_items:
    - cppcheck
    - rats
+
+- name: cpp | Install C++ build tools (apt)
+  apt: pkg={{ item }} state=present update_cache=yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags: package
+  with_items:
+   - scons

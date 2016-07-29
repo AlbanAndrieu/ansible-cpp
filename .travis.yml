@@ -2,11 +2,20 @@
 language: python
 python: "2.7"
 env:
-  - ANSIBLE_VERSION=1.9.2
+  - ANSIBLE_VERSION=2.1.0.0
 cache: bundler
 #sudo: false
 sudo: required
 dist: trusty
+addons:
+ apt:
+   sources:
+   - ubuntu-toolchain-r-test
+   packages:
+#   - cmake
+   - time
+   - gcc-4.8
+   - g++-4.8
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq python-apt python-pycurl
