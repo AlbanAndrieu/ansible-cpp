@@ -34,5 +34,5 @@ script:
   - sudo ansible --version
   - export ANSIBLE_ROLES_PATH="../"
 #  - echo localhost > inventory
-  - ansible-playbook -i hosts --syntax-check cpp.yml
-  - ansible-playbook -i hosts --connection=local --sudo -vvvv cpp.yml
+  - sudo ansible-playbook -i hosts --syntax-check cpp.yml
+  - sudo ansible-playbook -i hosts --connection=local --sudo -vvvv cpp.yml
