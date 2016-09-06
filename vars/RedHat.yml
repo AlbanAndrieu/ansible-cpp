@@ -1,0 +1,28 @@
+---
+gcc_version: ""
+cppunit_version: "1.12-1" # for CentOS 6
+boost_version: "1.41.0" # for CentOS 6
+clang_version: "3.5"
+
+cpp_package_list:
+  - "@Development tools"
+  - "libX*-devel"
+  - libstdc++
+#  - libstdc++-devel
+  - glibc
+#  - glibc-devel
+#  - ia32-libs
+#  - lib32stdc++6
+#  - g++-multilib
+  - apr
+  - apr-util
+#  - log4cxx
+  - openssl
+  - openldap
+  - libcurl
+  - zlib
+#  - libcrypto++9
+#  - libxerces-c28
+#opengl
+  - mesa-libGL-devel
+  - mesa-libGLU-devel

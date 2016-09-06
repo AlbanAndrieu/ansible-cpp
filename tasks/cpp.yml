@@ -1,10 +1,15 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
-- name: workstation | Install C++ toolchain PPA
+- name: Include OS specific vars
+  tags: java
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: cpp | Install C++ toolchain PPA
   apt_repository: repo='ppa:ubuntu-toolchain-r/test' update_cache=yes
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
   tags: cpp
+  become: yes
 
 - name: cpp | Install C++ compiler
   apt: pkg={{ item }} state=present update_cache=yes
@@ -12,17 +17,119 @@
   with_items:
    - gcc={{ gcc_version }}
    - g++={{ gcc_version }}
+   - gcc-4.9
+   - g++-4.9
+   - gcc-4.8
+   - g++-4.8
+   - gcc-4.7
+   - g++-4.7
+   - gcc-4.6
+   - g++-4.6
    - clang-{{ clang_version }}
   tags: cpp
+  become: yes
+
+#https://superuser.com/questions/381160/how-to-install-gcc-4-7-x-4-8-x-on-centos
+#gcc 4.7.2
+#So you could simply use his repo and install just gcc, instantly.
+#cd /etc/yum.repos.d
+#sudo wget http://people.centos.org/tru/devtools-1.1/devtools-1.1.repo
+#sudo yum --enablerepo=testing-1.1-devtools-6 install devtoolset-1.1-gcc devtoolset-1.1-gcc-c++
+
+#sudo wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
+#sudo yum install devtoolset-2-gcc devtoolset-2-binutils devtoolset-2-gcc-c++
+
+#export CC=/opt/centos/devtoolset-1.1/root/usr/bin/gcc
+#export CPP=/opt/centos/devtoolset-1.1/root/usr/bin/cpp
+#export CXX=/opt/centos/devtoolset-1.1/root/usr/bin/c++
+
+#sudo yum install devtoolset-1.1
+#sudo yum install devtoolset-2 --skip-broken
+#sudo yum install devtoolset-3
+
+- name: cpp | Install C++ compiler (RedHat based)
+  action: yum name={{ item }} state=present update_cache=yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  with_items:
+   - gcc
+   - gcc-c++
+#   - clang
+#   - compat-libstdc++-33
+#   - glibc-devel.i386
+#   - glibc-devel
+  tags: cpp
+  become: yes
+
+- name: cpp | Set cpp link to gcc
+  set_fact: cpp_dir=/usr/bin/
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: cpp | Set cpp link to gcc version
+  set_fact: cpp_version=4.9
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+#- name: cpp | Set cpp link to gcc version
+#  set_fact: cpp_version=4.4.7
+#  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: cpp | Display cpp link before
+  action: command update-alternatives --display gcc
+  changed_when: false
+  become: yes
+  ignore_errors: true
 
 #sudo update-alternatives --remove-all gcc
+#sudo update-alternatives --remove-all cpp
 #sudo update-alternatives --remove-all g++
-#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 20
-#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
+
+#TODO : Waiting ansible 2.2 to manage priority https://docs.ansible.com/ansible/alternatives_module.html
+# priority={{ item.priority }}
+- name: cpp | Configure cpp alternatives
+  alternatives: name={{ item.name }} link={{ item.link }} path={{ item.path }}
+  with_items:
+  - { name: gcc, link: /usr/bin/gcc, path: "{{ cpp_dir }}gcc-{{ cpp_version }}", priority: "50" }
+  - { name: cpp, link: /usr/bin/cpp, path: "{{ cpp_dir }}cpp-{{ cpp_version }}", priority: "50" }
+  - { name: g++, link: /usr/bin/g++, path: "{{ cpp_dir }}g++-{{ cpp_version }}", priority: "50" }
+  - { name: gcc, link: /usr/bin/gcc, path: "{{ cpp_dir }}gcc-4.8", priority: "10" }
+  - { name: cpp, link: /usr/bin/cpp, path: "{{ cpp_dir }}cpp-4.8", priority: "10" }
+  - { name: g++, link: /usr/bin/g++, path: "{{ cpp_dir }}g++-4.8", priority: "10" }
+  - { name: gcc, link: /usr/bin/gcc, path: "{{ cpp_dir }}gcc-4.7", priority: "0" }
+  - { name: cpp, link: /usr/bin/cpp, path: "{{ cpp_dir }}cpp-4.7", priority: "0" }
+  - { name: g++, link: /usr/bin/g++, path: "{{ cpp_dir }}g++-4.7", priority: "0" }
+  - { name: gcc, link: /usr/bin/gcc, path: "{{ cpp_dir }}gcc-4.6", priority: "-10" }
+  - { name: cpp, link: /usr/bin/cpp, path: "{{ cpp_dir }}cpp-4.6", priority: "-10" }
+  - { name: g++, link: /usr/bin/g++, path: "{{ cpp_dir }}g++-4.6", priority: "-10" }
+  when: not( (cpp_dir is undefined) or (cpp_dir is none) or (cpp_dir | trim == '') )
+        and
+        not( (cpp_version is undefined) or (cpp_version is none) or (cpp_version | trim == '') )
+  become: yes
+
+#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 40 --slave /usr/bin/gcc gcc /usr/bin/gcc-4.9
+#sudo update-alternatives --install /usr/bin/cpp cpp /usr/bin/cpp-4.9 40 --slave /usr/bin/cpp cpp /usr/bin/cpp-4.9
+#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+
+#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 30 --slave /usr/bin/gcc gcc /usr/bin/gcc-4.8
+#sudo update-alternatives --install /usr/bin/cpp cpp /usr/bin/cpp-4.8 30 --slave /usr/bin/cpp cpp /usr/bin/cpp-4.8
+#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 30 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
+
+#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 20 --slave /usr/bin/gcc gcc /usr/bin/gcc-4.7
+#sudo update-alternatives --install /usr/bin/cpp cpp /usr/bin/cpp-4.7 20 --slave /usr/bin/cpp cpp /usr/bin/cpp-4.7
+#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.7 20 --slave /usr/bin/g++ g++ /usr/bin/g++-4.7
+
+#sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 10 --slave /usr/bin/gcc gcc /usr/bin/gcc-4.6
+#sudo update-alternatives --install /usr/bin/cpp cpp /usr/bin/cpp-4.6 10 --slave /usr/bin/cpp cpp /usr/bin/cpp-4.6
+#sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 10 --slave /usr/bin/g++ g++ /usr/bin/g++-4.6
+
 #sudo update-alternatives --config gcc
+#sudo update-alternatives --config cpp
 #sudo update-alternatives --config g++
 
-- name: cpp | Install C++ librairies
+#ls -la /etc/alternatives/gcc*
+- name: cpp | Display cpp link after
+  action: command update-alternatives --list gcc
+  become: yes
+
+- name: cpp | Install C++ librairies (apt)
   apt: pkg={{ item }} state=present update_cache=yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags: cpp
@@ -33,33 +140,36 @@
    - libboost-thread{{ boost_version }}.0
    - libboost-date-time{{ boost_version }}-dev
    - libboost-system{{ boost_version }}.0
-#   - libstdc++5
-#   - libc6-i386
-#   - libc6-dev-i386
-#   - ia32-libs
-#   - lib32stdc++6
-#   - g++-multilib
-   - libapr1
-   - libaprutil1
-   - liblog4cxx10
-   - libssl0.9.8
-   - libldap-2.4-2
-   - libcurl3
-   - zlib1g
-#   - libcrypto++9
-#   - libxerces-c28
+  become: yes
 
-- name: cpp | Install C++ quality tool
-  apt: pkg={{ item }} state=present update_cache=yes
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+- name: cpp | Install C++ librairies (RedHat based)
+  action: yum name={{ item }} state=present update_cache=yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   tags: cpp
+  with_items:
+   - cppunit-{{ cppunit_version }}
+   - boost{{ boost_version }}
+  become: yes
+
+- name: cpp | Install C++ quality tool (apt)
+  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_package_state|default('present') }} update_cache=yes"
   with_items:
    - cppcheck
    - rats
+  tags: cpp
+  become: yes
 
-- name: cpp | Install C++ build tools (apt)
-  apt: pkg={{ item }} state=present update_cache=yes
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-  tags: package
+- name: jenkins-slave | Install CPP build tools
+  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_package_state|default('present') }} update_cache=yes"
   with_items:
    - scons
+  tags: package
+  tags: scons
+  tags: cpp
+  become: yes
+
+- name: cpp | Install required packages
+  action: "{{ ansible_pkg_mgr }} state={{ util_package_state|default('present') }} name={{ item }}"
+  with_items: cpp_package_list
+  tags: cpp
+  become: yes
