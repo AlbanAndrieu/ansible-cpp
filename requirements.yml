@@ -1,0 +1,14 @@
+- src: https://github.com/AlbanAndrieu/ansible-cmake.git
+  name: alban.andrieu.cmake
+  #path: roles
+  scm: git
+
+- src: https://github.com/AlbanAndrieu/ansible-scons.git
+  name: alban.andrieu.scons
+  #path: roles
+  scm: git
+
+- src: https://github.com/AlbanAndrieu/ansible-gcc.git
+  name: alban.andrieu.gcc
+  #path: roles
+  scm: git
