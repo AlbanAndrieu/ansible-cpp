@@ -4,3 +4,9 @@
 
   roles:
     - role: ./
+
+  vars:
+      cppunit_version: "1.13-0"
+      #cppunit_version: "1.13-0v5"
+      boost_version: "1.54"
+      #boost_version: "1.58"
