@@ -1,7 +1,4 @@
 ---
-cppunit_version: "1.12-1" # for CentOS 6
-boost_version: "1.41.0" # for CentOS 6
-clang_version: ""
 
 cpp_package_list:
   - "@Development tools"
