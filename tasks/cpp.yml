@@ -34,12 +34,19 @@
    - boost{{ boost_version }}
   become: yes
 
-- name: cpp | Install C++ quality tool (apt)
+- name: cpp | Install C++ quality tool cppcheck (apt)
   action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ util_package_state|default('present') }} update_cache=yes"
   with_items:
    - cppcheck
+  tags: cpp
+  become: yes
+
+- name: cpp | Install C++ quality tool rats (apt)
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ util_package_state|default('present') }} update_cache=yes"
+  with_items:
    - rats
   tags: cpp
+  when: ansible_distribution_version not in ['16.04']
   become: yes
 
 - name: cpp | Install required packages

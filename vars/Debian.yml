@@ -1,9 +1,11 @@
 ---
 #NOKcppunit_version: "1.13.1-2ubuntu1"
-cppunit_version: "1.13-0"
+#cppunit_version: "1.13-0"
+cppunit_version: "1.13-0v5"
 #NOKboost_version: "1.54.0-4ubuntu3.1"
 #boost_version: "1.48"
-boost_version: "1.54"
+#boost_version: "1.54"
+boost_version: "1.58"
 clang_version: "-3.5"
 
 cpp_package_list:
@@ -15,8 +17,9 @@ cpp_package_list:
 #  - g++-multilib
   - libapr1
   - libaprutil1
-  - liblog4cxx10
-  - libssl0.9.8
+#  - liblog4cxx10
+#  - liblog4cxx10v5
+#  - libssl0.9.8
   - libldap-2.4-2
   - libcurl3
   - zlib1g
