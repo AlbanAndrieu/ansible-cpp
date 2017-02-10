@@ -18,11 +18,15 @@
   tags: cpp
   with_items:
    - libcppunit-{{ cppunit_version }}
+#   - libboost-tools-dev
+#   - libboost-all-dev
    - libboost{{ boost_version }}-dbg
-   - libboost-iostreams{{ boost_version }}.0
-   - libboost-thread{{ boost_version }}.0
+   - libboost-iostreams{{ boost_version }}-dev
    - libboost-date-time{{ boost_version }}-dev
-   - libboost-system{{ boost_version }}.0
+#   - libboost-thread{{ boost_version }}.0
+   - libboost-thread{{ boost_version }}-dev
+#   - libboost-system{{ boost_version }}.0
+   - libboost-system{{ boost_version }}-dev
   become: yes
 
 - name: cpp | Install C++ librairies (RedHat based)

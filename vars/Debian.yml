@@ -2,11 +2,6 @@
 
 cpp_package_list:
 #  - libstdc++5
-#  - libc6-i386
-#  - libc6-dev-i386
-#  - ia32-libs
-#  - lib32stdc++6
-#  - g++-multilib
   - libapr1
   - libaprutil1
 #  - liblog4cxx10
