@@ -4,7 +4,7 @@ cpp_package_list:
 #  - libstdc++5
   - libxml2-dev
 #  - liblog4cxx10
-#  - liblog4cxx10v5  
+#  - liblog4cxx10v5
   - liblog4cxx-dev
   - libapr1
   - libaprutil1
