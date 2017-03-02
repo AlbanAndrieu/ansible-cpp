@@ -5,7 +5,6 @@ cpp_package_list:
   - libxml2-dev
 #  - liblog4cxx10
 #  - liblog4cxx10v5
-  - liblog4cxx-dev
   - libapr1
   - libaprutil1
 #  - libssl0.9.8
@@ -16,6 +15,7 @@ cpp_package_list:
 #  - libxerces-c28
 # - libz-dbg
 #opengl
+#  - liblog4cxx-dev
   - mesa-common-dev
   - libglu-dev
   - libgoogle-perftools-dev
