@@ -14,8 +14,8 @@ cpp_package_list:
 #  - libcrypto++9
 #  - libxerces-c28
 # - libz-dbg
-#opengl
 #  - liblog4cxx-dev
+#opengl
   - mesa-common-dev
   - libglu-dev
   - libgoogle-perftools-dev
