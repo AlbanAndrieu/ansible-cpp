@@ -17,7 +17,7 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags: cpp
   with_items:
-   - libcppunit-{{ cppunit_version }}
+   - libcppunit{{ cppunit_version }}
 #   - libboost-tools-dev
 #   - libboost-all-dev
    - libboost{{ boost_version }}-dbg
@@ -34,7 +34,7 @@
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
   tags: cpp
   with_items:
-   - cppunit-{{ cppunit_version }}
+   - cppunit{{ cppunit_version }}
    - boost{{ boost_version }}
   become: yes
 
@@ -112,7 +112,7 @@
   with_items:
    - rats
   tags: cpp
-  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version not in ['16.04']
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version in ['12.04','14.04']
   become: yes
 
 - name: cpp | Install required packages
