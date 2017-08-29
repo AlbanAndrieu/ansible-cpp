@@ -9,6 +9,9 @@
   action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
   with_items:
    - clang{{ clang_version }}
+   - clang-format
+   - clang-tidy
+#   - afl-clang #fuzzer
   tags: cpp
   become: yes
 
