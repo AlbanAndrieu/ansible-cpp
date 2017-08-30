@@ -5,15 +5,22 @@
   tags: java
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: cpp | Install C++ compiler
+- name: cpp | Install C++ clang compiler
   action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
   with_items:
    - clang{{ clang_version }}
+  tags: cpp
+  become: yes
+  
+- name: cpp | Install C++ clang compiler tools
+  action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
+  with_items:
    - clang-format
    - clang-tidy
 #   - afl-clang #fuzzer
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version not in ['12.04', '14.04']
   tags: cpp
-  become: yes
+  become: yes  
 
 - name: cpp | Install C++ librairies (apt)
   apt: pkg={{ item }} state=present update_cache=yes
