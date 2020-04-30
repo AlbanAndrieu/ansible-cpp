@@ -11,7 +11,7 @@
    - clang{{ clang_version }}
   tags: cpp
   become: yes
-  
+
 - name: cpp | Install C++ clang compiler tools
   action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
   with_items:
@@ -20,7 +20,7 @@
 #   - afl-clang #fuzzer
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version not in ['12.04', '14.04']
   tags: cpp
-  become: yes  
+  become: yes
 
 - name: cpp | Install C++ librairies (apt)
   action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
@@ -28,15 +28,11 @@
   tags: cpp
   with_items:
    - libcppunit{{ cppunit_version }}
-#   - libboost-tools-dev
-#   - libboost-all-dev
-   - libboost{{ boost_version }}-dbg
-   - libboost-iostreams{{ boost_version }}-dev
-   - libboost-date-time{{ boost_version }}-dev
-#   - libboost-thread{{ boost_version }}.0
-   - libboost-thread{{ boost_version }}-dev
-#   - libboost-system{{ boost_version }}.0
-   - libboost-system{{ boost_version }}-dev
+   - libboost{{ boost_version }}
+   - libboost-iostreams{{ boost_version }}
+   - libboost-date-time{{ boost_version }}
+   - libboost-thread{{ boost_version }}
+   - libboost-system{{ boost_version }}
   become: yes
 
 - name: cpp | Install C++ librairies (RedHat based)
@@ -73,7 +69,7 @@
 # ldconfig -v | grep libstdc++
    - libstdc++5
   become: yes
-  
+
 ##
 # 32 bits cross compilation
 #
@@ -90,7 +86,7 @@
    - lib32gcc-4.8-dev
    - libstdc++-4.8-dev
   become: yes
-  
+
 - name: cpp | Install C++ librairies for building 32bits (Debian based)
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ gcc_pkg_state|default('present') }} update_cache=yes"
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version in ['16.04']
@@ -102,7 +98,7 @@
    - g++-5-multilib
 #   - lib32stdc++5-dev
    - lib32gcc-5-dev
-   - libstdc++-5-dev   
+   - libstdc++-5-dev
 #   - lib32z1-dev
 #   - lib32gcc-6-dev
 #   - libncurses5:i386

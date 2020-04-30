@@ -2,11 +2,14 @@ cpp_enabled: yes                       # Enable module
 
 #NOKcppunit_version: "-1.13.1-2ubuntu1"
 #cppunit_version: "-1.13-0" # for Ubuntu 14
-cppunit_version: "-1.13-0v5" # for Ubuntu 16
+#cppunit_version: "-1.13-0v5" # for Ubuntu 16
+cppunit_version: "-dev=1.14.0-3" # ubuntu 18
+#cppunit_version: "1.14.0-4" # ubuntu 19
 #NOKboost_version: "1.54.0-4ubuntu3.1"
 #boost_version: "1.48" # for Ubuntu 14
 #boost_version: "1.54" # for Ubuntu 14
-boost_version: "1.58" # for Ubuntu 16
+#boost_version: "1.58" # for Ubuntu 16
+boost_version: "-dev=1.65.1.0ubuntu1" # ubuntu 18
 clang_version: "" # for Ubuntu
 
 #cppunit_version: "1.12-1" # for CentOS 6
