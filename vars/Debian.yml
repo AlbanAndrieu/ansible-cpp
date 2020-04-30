@@ -18,5 +18,5 @@ cpp_package_list:
 #opengl
   - mesa-common-dev
   - libglu-dev
-  - libgoogle-perftools-dev
-  - google-perftools
+  #- libgoogle-perftools-dev
+  #- google-perftools
