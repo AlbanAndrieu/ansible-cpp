@@ -22,7 +22,6 @@ before_install:
   - sudo apt-get install -qq python-apt python-pycurl
 install:
   # Install Ansible.
-  # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible-lint; fi
 
@@ -36,7 +35,8 @@ install:
   #- git clone https://github.com/AlbanAndrieu/ansible-gcc.git alban.andrieu.gcc
 
 script:
-  - sudo ansible --version
+  # Check ansible version
+  - ansible --version
 
   # Prepare tests
   #- echo localhost > hosts
@@ -45,9 +45,10 @@ script:
   - ansible-galaxy install --role-file requirements.yml
 
   # Check syntax
-  - sudo ansible-playbook -i hosts --syntax-check cpp.yml
+  - ansible-playbook -i hosts --syntax-check cpp.yml
 
-  - sudo ansible-playbook -i hosts --connection=local -vvvv cpp.yml
+  # First run
+  - ansible-playbook -i hosts --connection=local -vvvv cpp.yml
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
