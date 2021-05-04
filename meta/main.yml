@@ -1,8 +1,8 @@
 ---
 dependencies:
-  - { role: alban.andrieu.cmake }
-  - { role: alban.andrieu.scons }
-  - { role: alban.andrieu.gcc }
+  - { role: albanandrieu.cmake }
+  - { role: albanandrieu.scons }
+  - { role: albanandrieu.gcc }
 
 galaxy_info:
   author: Alban Andrieu
