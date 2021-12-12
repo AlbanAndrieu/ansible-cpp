@@ -9,8 +9,11 @@
   action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
   with_items:
    - clang{{ clang_version }}
-  tags: cpp
   become: yes
+  tags:
+   - package
+   - cpp
+   - clang
 
 - name: cpp | Install C++ clang compiler tools
   action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
@@ -19,13 +22,16 @@
    - clang-tidy
 #   - afl-clang #fuzzer
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version not in ['12.04', '14.04']
-  tags: cpp
+
   become: yes
+  tags:
+   - package
+   - cpp
+   - clang
 
 - name: cpp | Install C++ librairies (apt)
   action: "{{ ansible_pkg_mgr}} name={{ item }} update_cache=yes state={{ gcc_pkg_state|default('present') }}"
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version not in ['12.04','14.04']
-  tags: cpp
   with_items:
    - libcppunit{{ cppunit_version }}
    - libboost{{ boost_version }}
@@ -34,15 +40,22 @@
    - libboost-thread{{ boost_version }}
    - libboost-system{{ boost_version }}
   become: yes
+  tags:
+   - package
+   - cpp
+   - boost
 
 - name: cpp | Install C++ librairies (RedHat based)
   action: yum name={{ item }} state=present update_cache=yes
   when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux')
-  tags: cpp
   with_items:
    - cppunit{{ cppunit_version }}
    - boost{{ boost_version }}
   become: yes
+  tags:
+   - package
+   - cpp
+   - boost
 
 - name: cpp | Install C++ librairies for building 64bits (Debian based)
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ jenkins_pkg_state|default('present') }} update_cache=yes"
@@ -110,19 +123,27 @@
   action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ util_package_state|default('present') }} update_cache=yes"
   with_items:
    - cppcheck
-  tags: cpp
   become: yes
+  tags:
+   - package
+   - cpp
+   - cppcheck
 
 - name: cpp | Install C++ quality tool rats
   action: "{{ ansible_pkg_mgr }} name={{ item }} state={{ util_package_state|default('present') }} update_cache=yes"
   with_items:
    - rats
-  tags: cpp
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and ansible_distribution_version in ['12.04','14.04']
   become: yes
+  tags:
+   - package
+   - cpp
+   - rats
 
 - name: cpp | Install required packages
   action: "{{ ansible_pkg_mgr }} state={{ util_package_state|default('present') }} name={{ item }}"
   with_items: "{{ cpp_package_list }}"
-  tags: cpp
   become: yes
+  tags:
+   - package
+   - cpp
