@@ -2,6 +2,5 @@
 # This playbook contains common plays that will be run on all nodes.
 
 - include: cpp.yml
-  when: cpp_enabled 
+  when: cpp_enabled
   tags: [cpp]
-  

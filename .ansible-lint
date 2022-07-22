@@ -1,3 +1,4 @@
+---
 exclude_paths:
   - ./requirements.yml
   - ./.travis.yml
@@ -17,5 +18,10 @@ skip_list:
 #  - skip_this_id
 #tags:
 #  - run_this_tag
+warn_list:  # or 'skip_list' to silence them completely
+  - yaml  # Violations reported by yamllint
 use_default_rules: true
-#verbosity: 1
+# verbosity: 1
+
+# Offline mode disables installation of requirements.yml
+offline: true
