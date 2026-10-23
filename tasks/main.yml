@@ -4,3 +4,12 @@
 - ansible.builtin.import_tasks: cpp.yml
   when: cpp_enabled
   tags: [cpp]
+
+# Replaces the albanandrieu.scons dependency (archived repository)
+- name: Install SCons
+  ansible.builtin.package:
+    name: scons
+    state: "{{ scons_pkg_state | default('present') }}"
+  become: true
+  when: cpp_enabled
+  tags: [cpp, scons]
