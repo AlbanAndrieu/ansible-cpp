@@ -1,7 +1,6 @@
 ---
 dependencies:
   - { role: albanandrieu.cmake }
-  - { role: albanandrieu.scons }
   - { role: albanandrieu.gcc }
 
 galaxy_info:
